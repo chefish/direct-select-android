@@ -6,6 +6,7 @@
     android:layout_centerVertical="true">
 
     <TextView
+        android:textSize="21sp"
         android:id="@+id/ds_default_cell_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

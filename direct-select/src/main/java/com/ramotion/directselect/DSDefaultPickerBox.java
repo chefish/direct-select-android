@@ -1,6 +1,7 @@
 package com.ramotion.directselect;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
+ * 本身是个FrameLayout 内部有RelativeLayout，RelativeLayout，TextView
  * Default implementation of Picker Box element for Strings to work "from the box"
  * with default cell layout
  */
@@ -50,6 +52,7 @@ public class DSDefaultPickerBox extends DSAbstractPickerBox<String> {
     protected void onFinishInflate() {
         super.onFinishInflate();
         this.textView = findViewById(R.id.ds_default_cell_text);
+        textView.setTextColor(Color.RED);
         this.cellRoot = findViewById(R.id.ds_default_cell_root);
         this.cellRoot.setMinimumHeight(this.getHeight());
     }

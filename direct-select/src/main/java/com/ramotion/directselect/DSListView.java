@@ -41,6 +41,7 @@ public class DSListView<T> extends RelativeLayout implements AbsListView.OnScrol
     private ArrayList<String> dataFromAttributes = null;
 
     private Context context;
+    private static final String TAG = "DSListView";
 
     // Inner parts
     private ListView listView = null;
@@ -126,10 +127,10 @@ public class DSListView<T> extends RelativeLayout implements AbsListView.OnScrol
         listView = findViewById(R.id.list_view);
         selectorView = findViewById(R.id.selector_view);
 
-        if (selectorBgDrawable > 0)
-            selectorView.setBackgroundResource(selectorBgDrawable);
-        else
-            selectorView.setBackgroundColor(selectorBgColor);
+//        if (selectorBgDrawable > 0)
+//            selectorView.setBackgroundResource(selectorBgDrawable);
+//        else
+//            selectorView.setBackgroundColor(selectorBgColor);
 
         // If string data array provided from xml - use it with default string array adapter
         if (null != dataFromAttributes)
@@ -150,10 +151,13 @@ public class DSListView<T> extends RelativeLayout implements AbsListView.OnScrol
 
         if (null != this.pickerBox) {
             this.pickerBox.getLocationInWindow(selectboxLocation);
+
+            //cell高度取的是 DSDefaultPickerBox 的高度，是DSDefaultPickerBox的padding+文本高度
             this.cellHeight = this.pickerBox.getHeight();
         }
 
         if (null != this.adapter && this.adapter instanceof DSDefaultAdapter)
+            //adapter里的item高度 也用cellHeight
             ((DSDefaultAdapter) this.adapter).setCellHeight(cellHeight);
 
         // Calculate positions of selector and self position
@@ -268,20 +272,22 @@ public class DSListView<T> extends RelativeLayout implements AbsListView.OnScrol
             this.pickerBox.getCellRoot().startAnimation(scaleAnimation);
         }
 
-        // Show picker view animation
-        AlphaAnimation showAnimation = new AlphaAnimation(0f, 1f);
-        showAnimation.setDuration(200);
-        showAnimation.setInterpolator(new AccelerateInterpolator());
-        showAnimation.setAnimationListener(new AnimationListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                animationInProgress = false;
-                listViewIsShown = true;
-                hideListView();
-            }
-        });
+        animationInProgress = false;
+        listViewIsShown = true;
+        hideListView();
 
-        this.startAnimation(showAnimation);
+        // Show picker view animation
+//        AlphaAnimation showAnimation = new AlphaAnimation(0f, 1f);
+//        showAnimation.setDuration(200);
+//        showAnimation.setInterpolator(new AccelerateInterpolator());
+//        showAnimation.setAnimationListener(new AnimationListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animation animation) {
+//
+//            }
+//        });
+
+//        this.startAnimation(showAnimation);
     }
 
 ///////////////////////////////////////// CLIENT METHODS ///////////////////////////////////////////
